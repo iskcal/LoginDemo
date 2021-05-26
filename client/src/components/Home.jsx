@@ -1,11 +1,15 @@
 import userManager from '../utils/userService';
+import { useState } from 'react';
+
+const no_user = "No user data";
 
 function Home() {
+  const [text, setText] = useState(no_user);
   userManager.getUser().then((user) => {
     if (user) {
-      console.log("user logged in", user.profile);
+      setText(JSON.stringify(user.profile));
     } else {
-      console.log("user not logged in");
+      setText(no_user);
     }
   })
   return (
@@ -15,7 +19,7 @@ function Home() {
         <button>Call API</button>
         <button onClick={()=>userManager.signoutRedirect()}>Logout</button>
       </div>
-      <p>Hello world</p>
+      <p>{text}</p>
     </>
   );
 }

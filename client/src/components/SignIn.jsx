@@ -1,9 +1,9 @@
 // import { UserManager } from 'oidc-client';
 import userManager from '../utils/userService';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 
-function Callback() {
+function SignIn() {
   const history = useHistory();
   useEffect(()=>{
     async function signinAsync() {
@@ -15,4 +15,4 @@ function Callback() {
   return null;
 }
 
-export default Callback;
+export default SignIn;
