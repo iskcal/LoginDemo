@@ -2,3 +2,5 @@
 /IdentityServerHost/obj
 /IdentityServerHost/keys
 
+/Api/bin
+/Api/obj
