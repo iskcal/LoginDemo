@@ -23,4 +23,6 @@ const config = {
     post_logout_redirect_uri: "https://localhost:3000/signout-oidc",
 };
 
-export default userManager = new UserManager(config);
+const userManager = new UserManager(config);
+
+export default userManager;

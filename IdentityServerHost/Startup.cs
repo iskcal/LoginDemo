@@ -59,6 +59,12 @@ namespace IdentityServerHost
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCors(builder => builder
+                .WithOrigins("https://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials());
+            
             if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
