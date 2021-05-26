@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace Api
@@ -28,6 +29,17 @@ namespace Api
         {
 
             services.AddControllers();
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options => 
+                {
+                    options.Authority = "https://localhost:5001";
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                    };
+                });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
@@ -48,6 +60,7 @@ namespace Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
