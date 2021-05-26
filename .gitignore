@@ -1,3 +1,5 @@
+/.vscode
+
 /IdentityServerHost/bin
 /IdentityServerHost/obj
 /IdentityServerHost/keys
