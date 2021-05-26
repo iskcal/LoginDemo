@@ -1,18 +1,17 @@
-import userManager from './utils/userService';
+import Home from './components/Home';
+import Callback from './components/Callback';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
-  userManager.getUser().then((user) => {
-    if (user) {
-      console.log("user logged in", user.profile);
-    } else {
-      console.log("user not logged in");
-    }
-  })
+  
   return (
     <div className="App">
-      <button onClick={()=>userManager.signinRedirect()}>Login</button>
-      <button>Call API</button>
-      <button onClick={()=>userManager.signoutRedirect()}>Logout</button>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/signin-oidc' component={Callback} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
