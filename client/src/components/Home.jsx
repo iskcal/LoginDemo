@@ -12,11 +12,25 @@ function Home() {
       setText(no_user);
     }
   })
+
+  const fetchApi = async () => {
+    const user = await userManager.getUser();
+    const data = await fetch("https://localhost:5002/WeatherForecast", {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Authorization': "Bearer " + user.access_token
+      }
+    });
+    const result = await data.json();
+    console.log(result);
+  }
+
   return (
     <>
       <div>
         <button onClick={()=>userManager.signinRedirect()}>Login</button>
-        <button>Call API</button>
+        <button onClick={()=>fetchApi()}>Call API</button>
         <button onClick={()=>userManager.signoutRedirect()}>Logout</button>
       </div>
       <p>{text}</p>
