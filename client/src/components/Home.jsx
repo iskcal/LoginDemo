@@ -2,9 +2,11 @@ import userManager from '../utils/userService';
 import { useState } from 'react';
 
 const no_user = "No user data";
+const no_data = "No data";
 
 function Home() {
   const [text, setText] = useState(no_user);
+  const [data, setData] = useState(no_data);
   userManager.getUser().then((user) => {
     if (user) {
       setText(JSON.stringify(user.profile));
@@ -24,6 +26,7 @@ function Home() {
     });
     const result = await data.json();
     console.log(result);
+    setData(JSON.stringify(result));
   }
 
   return (
@@ -34,6 +37,7 @@ function Home() {
         <button onClick={()=>userManager.signoutRedirect()}>Logout</button>
       </div>
       <p>{text}</p>
+      <p>{data}</p>
     </>
   );
 }
